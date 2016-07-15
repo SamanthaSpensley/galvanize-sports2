@@ -36,26 +36,18 @@ module.exports = {
         for (var i in shoppingCart) {
           checkoutSubtotal += (shoppingCart[i].quantity * inventory[i].price)
         }
-        return checkoutSubtotal.toFixed(2);
+        return Number(checkoutSubtotal.toFixed(2));
     },
     getTax: function(subtotal, rate){
         var tax = 0.00;
           tax = subtotal * rate;
-        return tax.toFixed(2);
+        return Number(tax.toFixed(2));
     },
     getCheckoutTotal: function(){
-        //checkoutTotal = getTax(getCheckoutSubtotal(), TAX_RATE);
         var TAX_RATE = 0.078;
         var checkoutTotal = 0.00;
-        var calcSubTotal = 0;
-        var calcTax = 0;
 
-        for (var i in shoppingCart) {
-          calcSubTotal += (shoppingCart[i].quantity * inventory[i].price)
-        }
-        calcTax = calcSubTotal * TAX_RATE;
-        checkoutTotal = calcSubTotal + calcTax;
-
+        checkoutTotal = this.getTax(this.getCheckoutSubtotal(), TAX_RATE)+this.getCheckoutSubtotal();
         return checkoutTotal.toFixed(2);
     }
 }
