@@ -19,22 +19,43 @@ module.exports = {
         }
     },
     removeItem: function(itemId, quantity){
-        // Your code here!
+        for (var index in shoppingCart) {
+          if (shoppingCart[index].itemId === itemId) {
+            if (quantity > shoppingCart[index].quantity) {
+              inventory[index].quantityAvailable += shoppingCart[index].quantity;
+              shoppingCart[index].quantity = 0;
+            } else {
+              shoppingCart[index].quantity -= quantity;
+              inventory[index].quantityAvailable += quantity;
+            }
+          }
+        }
     },
     getCheckoutSubtotal: function(){
         var checkoutSubtotal = 0.00;
-        // Your code here!
-        return checkoutSubtotal;
+        for (var i in shoppingCart) {
+          checkoutSubtotal += (shoppingCart[i].quantity * inventory[i].price)
+        }
+        return checkoutSubtotal.toFixed(2);
     },
     getTax: function(subtotal, rate){
         var tax = 0.00;
-        // Your code here!
-        return tax;
+          tax = subtotal * rate;
+        return tax.toFixed(2);
     },
     getCheckoutTotal: function(){
+        //checkoutTotal = getTax(getCheckoutSubtotal(), TAX_RATE);
         var TAX_RATE = 0.078;
         var checkoutTotal = 0.00;
-        // Your code here!
-        return checkoutTotal;
+        var calcSubTotal = 0;
+        var calcTax = 0;
+
+        for (var i in shoppingCart) {
+          calcSubTotal += (shoppingCart[i].quantity * inventory[i].price)
+        }
+        calcTax = calcSubTotal * TAX_RATE;
+        checkoutTotal = calcSubTotal + calcTax;
+
+        return checkoutTotal.toFixed(2);
     }
 }
