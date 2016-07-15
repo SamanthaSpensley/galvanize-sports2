@@ -21,7 +21,7 @@ describe("Functions should work", function() {
       galvanizeSports.addItem(18, 1);
       assert.equal(galvanizeSports.shoppingCart[2].quantity, 3, "Items 3 should be added to the shopping cart");
     });
-    xit("updates the inventory", function () {
+    it("updates the inventory", function () {
       initializeData();
       galvanizeSports.addItem(10, 1);
       assert.equal(galvanizeSports.inventory[0].quantityAvailable, 2, "Item 1 should be removed from the available inventory");
@@ -30,7 +30,7 @@ describe("Functions should work", function() {
       galvanizeSports.addItem(18, 1);
       assert.equal(galvanizeSports.inventory[2].quantityAvailable, 6, "Item 3 should be removed from the available inventory");
     });
-    xit("when requested quantity is greater than available inventory, remaining inventory is added to cart", function () {
+    it("when requested quantity is greater than available inventory, remaining inventory is added to cart", function () {
       initializeData();
       galvanizeSports.addItem(10, 50);
       assert.equal(galvanizeSports.shoppingCart[0].quantity, 5, "All available item 1's should be added to the shopping cart");

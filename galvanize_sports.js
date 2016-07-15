@@ -6,7 +6,17 @@ module.exports = {
     inventory: data.inventory,
     shoppingCart: data.shoppingCart,
     addItem: function(itemId, quantity){
-        // Your code here!
+        for (var index in inventory) {
+          if (inventory[index].id === itemId) {
+            if (quantity > inventory[index].quantityAvailable) {
+              shoppingCart[index].quantity += inventory[index].quantityAvailable;
+              inventory[index].quantityAvailable = 0;
+            } else {
+              shoppingCart[index].quantity += quantity;
+              inventory[index].quantityAvailable -= quantity;
+            }
+          }
+        }
     },
     removeItem: function(itemId, quantity){
         // Your code here!
